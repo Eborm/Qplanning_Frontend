@@ -1,0 +1,32 @@
+.pull-right {
+  float: right;
+  /* position: static; */
+  margin-top: -55px;
+  margin-right: 1%;
+  color: white;
+}
+
+.qGreen {
+  color: #8aba87;
+}
+
+.qOrange {
+  color: #ebbd64;
+}
+
+.qBlue {
+  color: #85c4f0;
+}
+
+.qRed {
+  color: #EA6A6A;
+}
+
+mat-toolbar-row.mat-toolbar-row {
+  background-color: #85c4f0;
+}
+
+.customLoginButton{
+  font-size: smaller;
+  line-height: 10px;
+}

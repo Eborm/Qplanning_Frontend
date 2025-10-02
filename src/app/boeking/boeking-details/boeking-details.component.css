@@ -1,0 +1,16 @@
+.grid{
+  display: grid;
+}
+
+.warning{
+  font-size: 12px;
+  color: orange;
+}
+
+.xs{
+  width: 60px;
+}
+
+.large{
+  width: 120px;
+}

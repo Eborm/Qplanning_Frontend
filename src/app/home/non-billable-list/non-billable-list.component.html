@@ -1,0 +1,36 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Indirecte Uren
+    </mat-panel-title>
+    <mat-panel-description>
+      per week
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <table mat-table class="customTable" [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="Weeknumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Week </th>
+      <td mat-cell *matCellDef="let element"> {{element.weeknumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Year">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Jaar </th>
+      <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Subject">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Klant </th>
+      <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Hours">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Uren </th>
+      <td mat-cell *matCellDef="let element"> {{element.hours}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</mat-expansion-panel>

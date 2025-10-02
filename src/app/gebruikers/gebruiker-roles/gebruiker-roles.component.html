@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content class="grid" [formGroup]="form" >
+
+  <mat-form-field>
+    <mat-select required placeholder="Roles" formControlName="role" >
+      <mat-option *ngFor="let role of roles" [value]="role">
+        {{role}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Sluiten</button>
+  <button [disabled]="!form.valid" class="mat-raised-button mat-primary" (click)="save()">{{saveButtonText}}</button>
+</mat-dialog-actions>

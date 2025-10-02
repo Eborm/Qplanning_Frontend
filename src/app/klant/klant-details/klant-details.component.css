@@ -1,0 +1,8 @@
+.grid{
+  display: grid;
+}
+
+.no-inline-block
+{
+  display: initial;
+}

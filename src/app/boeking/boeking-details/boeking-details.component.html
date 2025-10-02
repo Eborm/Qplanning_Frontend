@@ -1,0 +1,93 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content class="grid" [formGroup]="form" >
+
+
+  <table class="example-full-width"><tr>
+    <td><mat-form-field  class="xs">
+      <input matInput placeholder="Uren" required maxlength="3" formControlName="uren">
+    </mat-form-field></td>
+    <td><mat-form-field class="xs">
+      <input matInput placeholder="Week nr." [ngModelOptions]="{standalone: true}" type="number" (change)="plannedDateShouldChange()" maxlength="2" [(ngModel)]="geplandeWeeknummer" >
+    </mat-form-field></td>
+    <td><mat-form-field class="xs">
+      <input matInput placeholder="Jaar" [ngModelOptions]="{standalone: true}" type="number"  (change)="plannedDateShouldChange()" maxlength="4" [(ngModel)]="geplandeJaar" >
+    </mat-form-field></td>
+    <td><mat-form-field  class="large">
+      <input [(ngModel)]="plannedDate" matInput [matDatepicker]="plannedDatePicker"  placeholder="plan datum"  [ngModelOptions]="{standalone: true}">
+      <mat-datepicker-toggle  matSuffix [for]="plannedDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #plannedDatePicker></mat-datepicker>
+    </mat-form-field></td>
+    <!--<td><mat-form-field class="example-full-width">
+      <input matInput placeholder="Weeknummer" minlength="2" maxlength="2" #weeknummer formControlName="weeknummer">
+      <mat-hint align="end">{{weeknummer.value.length}} / 2</mat-hint>
+    </mat-form-field></td>
+    <td><mat-form-field class="example-full-width">
+      <input matInput placeholder="Jaar" minlength="4" maxlength="4" #jaar formControlName="jaar">
+      <mat-hint align="end">{{jaar.value.length}} / 4</mat-hint>
+    </mat-form-field></td>-->
+  </tr></table>
+
+  <mat-form-field *ngIf="medewerkerId">
+    <mat-select required placeholder="Medewerker" formControlName="medewerkerId" >
+      <mat-option *ngFor="let medewerker of medewerkersDropDown" [value]="medewerker.id">
+        {{medewerker.naam}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="!medewerkerId">
+    <mat-select [multiple]="true"  required placeholder="Medewerker" formControlName="medewerkerIds" >
+      <mat-option *ngFor="let medewerker of medewerkersDropDown" [value]="medewerker.id">
+        {{medewerker.naam}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngIf="!klantOrIndirectIsProvided" class="warning">
+    * Klant of Indirecte uren dienen minimaal gevuld te zijn.
+  </div>
+
+  <mat-form-field>
+      <mat-select (selectionChange)="getBookyears($event)" placeholder="Klant" formControlName="klantId" >
+      <mat-option>Geen klant</mat-option>
+      <mat-option *ngFor="let klant of klantenDropDown" [value]="klant.id">
+        {{klant.naam}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Boekjaar" formControlName="boekjaar" >
+      <mat-option>Geen boekjaar</mat-option>
+      <mat-option *ngFor="let boekjaar of boekjaarDropDown" [value]="boekjaar">
+        {{boekjaar}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select (selectionChange)="setIndirecteUren($event)" placeholder="Indirecte uren" formControlName="indirecteUrenId" >
+      <mat-option>Geen indirecte uren</mat-option>
+      <mat-option *ngFor="let indirecteUren of indirecteUrenDropDown" [value]="indirecteUren.id">
+        {{indirecteUren.naam}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Opdracht" formControlName="opdrachtId" >
+      <mat-option>Geen opdracht</mat-option>
+      <mat-option *ngFor="let opdracht of opdrachtenDropDown" [value]="opdracht.id">
+        {{opdracht.naam}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Sluiten</button>
+  <button [disabled]="!form.valid || klantOrIndirectIsProvided === false" class="mat-raised-button mat-primary" (click)="save()">{{saveButtonText}}</button>
+</mat-dialog-actions>
+

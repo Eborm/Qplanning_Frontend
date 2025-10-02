@@ -1,0 +1,60 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.main-div{
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+
+.main-div-top{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  max-width: 80%;
+  margin: auto;
+}
+
+.customTable {
+  width: 80%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 500px;
+}
+
+.customTable-fullscreen {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 500px;
+}
+
+
+.customTable-medium {
+  width: 60%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 500px;
+}
+
+.customTable-small {
+  width: 40%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 500px;
+}
+
+th.mat-header-cell {
+  text-align: left;
+  max-width: 300px;
+}
+
+.spacer{
+  margin-left: 20px;
+}

@@ -1,0 +1,97 @@
+table{
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+thead td{
+  border: 1px dotted lightslategray;
+  font-weight: 500;
+}
+
+thead th {
+  border: 1px dotted lightslategray;
+  font-weight: 500;
+  min-width: 25px;
+}
+
+tbody th{
+  border: 1px dotted lightslategray;
+  font-weight: normal;
+}
+
+tbody td{
+  border: 1px dotted lightslategray;
+  font-weight: normal;
+}
+
+tbody tr:nth-child(odd){
+  background: #E0E8F2;
+}
+
+.smallFont {
+  font-size: 12px;
+}
+
+.xsFont{
+  font-size: 9px;
+}
+
+p.xsFont {
+  padding: 0;
+  margin: 0;
+}
+
+th.boldTableHeader a{
+  cursor: pointer;
+}
+
+.mat-icon {
+  font-size: 15px;
+  margin-bottom: -5px;
+}
+
+th.boldTableHeader.boldText{
+  font-weight: 500;
+}
+
+.tableFixHead          { overflow-y: auto; height: 100px; }
+.tableFixHead thead th.weekHeader { position: sticky; top: 0;  background: #85c4f0; }
+
+
+.ZuydPlanningHeader {
+  color: white;
+  background-color: #85c4f0;
+}
+
+.qGreenArrow {
+  color: #8aba87;
+}
+
+.qOrangeArrow {
+  color: #ebbd64;
+}
+
+.qGreen {
+  color: #8aba87;
+}
+
+.qOrange {
+  color: #ebbd64;
+}
+
+.qBlue {
+  color: #85c4f0;
+}
+
+.qRed {
+  color: #EA6A6A;
+}
+
+.loader ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #8aba87;
+}
+
+.icon-display {
+  transform: scale(1);
+}

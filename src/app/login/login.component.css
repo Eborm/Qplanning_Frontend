@@ -1,0 +1,7 @@
+.qBlue {
+  color: #85c4f0;
+}
+
+.loader ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #8aba87;
+}

@@ -1,0 +1,43 @@
+<body>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h1>QPlanning</h1>
+    <span class="menu-spacer"></span>
+    <div *ngIf="isLoggedIn">
+      <a mat-button [routerLink]="'/'"> Overzicht </a>
+
+      <button mat-button *ngIf="isManager"  [matMenuTriggerFor]="boeking">Plannen</button>
+      <mat-menu #boeking="matMenu">
+        <button mat-menu-item *ngIf="isAtLeastPlanner" [routerLink]="'/boekingen-overzicht'">Boekingen overzicht</button>
+        <button mat-menu-item *ngIf="isManager" [routerLink]="'/klant-planning'">Klant planning</button>
+        <button mat-menu-item *ngIf="isManager" [routerLink]="'/medewerker-planning'">Medewerker planning</button>
+      </mat-menu>
+
+      <button mat-button *ngIf="isAdmin" [matMenuTriggerFor]="beheer">Beheer</button>
+      <mat-menu #beheer="matMenu">
+        <button mat-menu-item [routerLink]="'/beheer-medewerkers'">Medewerkers beheren</button>
+        <button mat-menu-item [routerLink]="'/beheer-klanten'">Klanten beheren</button>
+        <button mat-menu-item [routerLink]="'/beheer-gebruikers'">Gebruikers beheren</button>
+      </mat-menu>
+
+      <a mat-button class="customColor" (click)="redirectToResetPassword()"> Wijzig wachtwoord </a>
+
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div *ngIf="!isLoggedIn" class="pull-right">
+  <a mat-button [routerLink]="'/login'"> Inloggen </a>
+</div>
+<div *ngIf="isLoggedIn" class="pull-right">
+
+  <a mat-button [routerLink]="'/login'" class="customLoginButton">
+    <div > Welkom, {{username}}
+    <p> Uitloggen </p>
+    </div></a>
+</div>
+
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+</body>

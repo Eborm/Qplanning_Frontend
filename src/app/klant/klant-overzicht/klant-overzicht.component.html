@@ -1,0 +1,77 @@
+<div fxLayout fxLayoutAlign="center center" class="reserve-height">
+  <mat-label>Klant filter:</mat-label>
+  <mat-form-field class="filter" floatLabel="never">
+    <mat-label>klant naam</mat-label>
+    <input matInput [formControl]="klantFilter">
+  </mat-form-field>
+
+  <button class="button-right margin-right" mat-button (click)="addBoekjaren()">
+    <mat-icon>add_circle</mat-icon>
+    Boekjaren opvoeren
+  </button>
+
+  <button class="button-right" mat-button (click)="addKlant()">
+    <mat-icon>add_circle</mat-icon>
+    Klant toevoegen
+  </button>
+</div>
+
+
+
+
+<table mat-table class="customTable-fullscreen" [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="Name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="naam"> Klant </th>
+    <td mat-cell *matCellDef="let element"> {{element.naam}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Partner">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="medewerkerNaam"> Partner of Manager</th>
+    <td mat-cell *matCellDef="let element"> {{element.medewerkerNaam}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="ResponsibleTeam">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="verantwoordelijkTeamNaam"> Verantwoordelijk team </th>
+    <td mat-cell *matCellDef="let element"> {{element.verantwoordelijkTeamNaam}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="ResponsibleTeams">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="plandbaarDoorTeamNamen"> Planbaar door teams </th>
+    <td mat-cell *matCellDef="let element"> {{element.plandbaarDoorTeamNamen}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Startdate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="startdatum"> Start datum </th>
+    <td mat-cell *matCellDef="let element"> {{element.startdatum}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Enddate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="einddatum"> Eind datum</th>
+    <td mat-cell *matCellDef="let element"> {{element.einddatum}} </td>
+  </ng-container>
+
+<!--  <ng-container matColumnDef="boekjaren">
+    <th mat-header-cell *matHeaderCellDef> Boekjaren </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="primary" (click)="showBoekjarenDetails(element)">
+        <mat-icon class="mat-18">euro</mat-icon>
+      </button>
+    </td>
+  </ng-container>-->
+
+  <ng-container matColumnDef="update">
+    <th mat-header-cell *matHeaderCellDef> Bewerken </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="primary" (click)="redirectToUpdate(element)">
+        <mat-icon class="mat-18">edit</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+<mat-paginator [pageSize]="50" [pageSizeOptions]="[20, 50, 100]">
+</mat-paginator>

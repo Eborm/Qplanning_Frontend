@@ -1,0 +1,84 @@
+<button class="button-right" mat-button (click)="addUser()">
+  <mat-icon>add_circle</mat-icon>
+  Gebruiker toevoegen
+</button>
+
+<div fxLayout fxLayoutAlign="center center">
+  <mat-form-field fxFlex="40%">
+    <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="customTable-fullscreen" matSort>
+  <ng-container matColumnDef="Voornaam">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Voornaam </th>
+    <td mat-cell *matCellDef="let element"> {{element.voornaam}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Achternaam">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Achternaam </th>
+    <td mat-cell *matCellDef="let element"> {{element.achternaam}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Email">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Gebruikersnaam">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Gebruikersnaam </th>
+    <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Roles">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Rollen </th>
+    <td mat-cell *matCellDef="let element"> {{element.roles}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="roleButtons">
+    <th mat-header-cell *matHeaderCellDef> Rol beheer </th>
+    <td mat-cell *matCellDef="let element">
+      <button *ngIf="!element.roles" mat-icon-button color="primary" (click)="redirectToAddRole(element.email)">
+        <mat-icon class="mat-18">add_circle</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" (click)="redirectToDeleteRole(element.email)">
+        <mat-icon class="mat-18">delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="resetpassword">
+    <th mat-header-cell *matHeaderCellDef> Reset Wachtwoord </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="primary" (click)="redirectToResetPassword(element.id, element.email)">
+        <mat-icon class="mat-18">security</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="update">
+    <th mat-header-cell *matHeaderCellDef> Update </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="primary" (click)="redirectToUpdate(element)">
+        <mat-icon class="mat-18">edit</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef> Delete </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="warn" (click)="redirectToDelete(element.email)">
+        <mat-icon class="mat-18">delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+<mat-paginator [pageSize]="50" [pageSizeOptions]="[20, 50, 100]">
+</mat-paginator>
+

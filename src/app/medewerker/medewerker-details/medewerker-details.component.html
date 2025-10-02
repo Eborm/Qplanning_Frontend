@@ -1,0 +1,64 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content class="grid" [formGroup]="form" >
+
+
+  <table class="example-full-width"><tr>
+    <td><mat-form-field class="example-full-width">
+      <input matInput placeholder="Voornaam"  formControlName="voornaam">
+    </mat-form-field></td>
+    <td><mat-form-field class="example-full-width">
+      <input matInput placeholder="TussenVoegsel" formControlName="tussenVoegsel">
+    </mat-form-field></td>
+  </tr></table>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Achternaam" formControlName="achternaam">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Email"  formControlName="email">
+  </mat-form-field>
+
+
+  <table class="example-full-width"><tr>
+    <td><mat-form-field class="example-full-width">
+      <input matInput placeholder="Tarief" minlength="1" maxlength="3" #tarief formControlName="tarief">
+      <mat-hint align="end">{{tarief.value.length}} / 3</mat-hint>
+    </mat-form-field></td>
+    <td><mat-form-field class="example-full-width">
+      <input matInput placeholder="InternTarief" minlength="1" maxlength="3" #internTarief formControlName="internTarief">
+      <mat-hint align="end">{{internTarief.value.length}} / 3</mat-hint>
+    </mat-form-field></td>
+  </tr></table>
+
+  <mat-form-field>
+    <mat-select required placeholder="Functie" formControlName="medewerkerFunctieId" >
+      <mat-option *ngFor="let functie of medewerkerFunctieDropDown" [value]="functie.id">
+        {{functie.naam}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Team" formControlName="teamId" >
+      <mat-option *ngFor="let team of teamDropDown" [value]="team.id">
+        {{team.naam}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select [multiple]="true" placeholder="Planbaar door teams"
+                formControlName="planbaarDoorTeamIds">
+      <mat-option *ngFor="let team of teamDropDown" [value]="team.id">
+        {{team.naam}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Sluiten</button>
+  <button [disabled]="!form.valid" class="mat-raised-button mat-primary" (click)="save()">{{saveButtonText}}</button>
+</mat-dialog-actions>
+

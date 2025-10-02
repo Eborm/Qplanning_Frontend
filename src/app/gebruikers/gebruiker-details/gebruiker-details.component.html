@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-dialog-content class="grid" [formGroup]="form">
+
+  <mat-form-field>
+    <input matInput required
+           placeholder="Voornaam"
+           formControlName="voornaam">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput required
+           placeholder="Achternaam"
+           formControlName="achternaam">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput required
+           placeholder="Email (dit is tevens uw gebruikersnaam bij het inloggen!)"
+           formControlName="email">
+  </mat-form-field>
+
+  <mat-form-field *ngIf="modalMode === 0" >
+    <input matInput required
+           type="password"
+           placeholder="Wachtwoord"
+           formControlName="password">
+    <mat-hint align="begin">Minimaal één hoofdletter, één kleine letter, één cijfer én minimaal 8 karakters lang.</mat-hint>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button class="mat-raised-button" (click)="close()">Sluiten</button>
+  <button [disabled]="!form.valid" class="mat-raised-button mat-primary" (click)="save()">{{saveTitle}}</button>
+</mat-dialog-actions>
