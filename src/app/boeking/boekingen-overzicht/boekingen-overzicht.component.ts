@@ -17,7 +17,7 @@ import * as fileSaver from 'file-saver';
 export class BoekingenOverzichtComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['Year', 'Weeknumber', 'Hours'
+  public displayedColumns = ['Date', 'Weeknumber', 'Hours'
     , 'BookedFor', 'Assignment',  'Employee',
     'Function', 'Team', 'update', 'delete'];
   public dataSource = new MatTableDataSource<BookingDetailsView>();

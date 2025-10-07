@@ -29,9 +29,9 @@
   </mat-form-field>-->
   <mat-label style="font-weight:bold">Filters: </mat-label>
 
-  <mat-label>Geboekt op:</mat-label>
+  <mat-label>Klant:</mat-label>
   <mat-form-field class="filter" floatLabel="never">
-    <mat-label>geboekt op</mat-label>
+    <mat-label>Klant</mat-label>
     <input matInput [formControl]="geboektOpFilter">
   </mat-form-field>
 
@@ -63,9 +63,9 @@
 
 
 <table mat-table class="customTable-fullscreen" [dataSource]="dataSource" matSort>
-  <ng-container matColumnDef="Year">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="jaar"> Jaar </th>
-    <td mat-cell *matCellDef="let element"> {{element.jaar}} </td>
+  <ng-container matColumnDef="Date">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="Date"> Datum </th>
+    <td mat-cell *matCellDef="let element">{{element.plannedDate.split('T')[0]}} </td>
     <td mat-footer-cell *matFooterCellDef> Total </td>
   </ng-container>
 
@@ -76,7 +76,7 @@
   </ng-container>
 
   <ng-container matColumnDef="BookedFor">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header="geboektOp"> Geboekt Op</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header="geboektOp"> Klant</th>
     <td mat-cell *matCellDef="let element"> {{element.geboektOp}} </td>
     <td mat-footer-cell *matFooterCellDef></td>
   </ng-container>
