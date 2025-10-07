@@ -1,62 +1,54 @@
 
 <p></p>
-<mat-form-field>
-  <mat-label>Vanaf</mat-label>
-  <input [(ngModel)]="startDate" matInput [matDatepicker]="startDatePicker"  placeholder="datum vanaf">
-  <mat-datepicker-toggle  matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
-  <mat-datepicker #startDatePicker></mat-datepicker>
-</mat-form-field>
-<mat-form-field class="spacer">
-  <mat-label>Tot en met</mat-label>
-  <input [(ngModel)]="endDate" matInput [matDatepicker]="endDatePicker"  placeholder="tot en met">
-  <mat-datepicker-toggle  matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
-  <mat-datepicker #endDatePicker></mat-datepicker>
-</mat-form-field>
-<mat-form-field>
-  <mat-select [(ngModel)]="selectedTeamId"  placeholder="Team" >
-    <mat-option>Alle teams</mat-option>
-    <mat-option *ngFor="let team of teamDropDown" [value]="team.id">
-      {{team.naam}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<button class="spacer" mat-button (click)="getAllBookingRecords()">Zoek planning</button>
-<button class="spacer button-right" mat-button (click)="getExcelExport()">Exporteren naar Excel</button>
 
 <div fxLayout fxLayoutAlign="center center" class="reserve-height">
  <!-- <mat-form-field fxFlex="40%">
     <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>-->
-  <mat-label style="font-weight:bold">Filters: </mat-label>
+  <h1>Boekingen
+    <button class="button-right" mat-button (click)="getAllBookingRecords()">Zoek planning</button>
+    <button class="button-right" style="transform: translateX(-70%);" mat-button (click)="getExcelExport()">Exporteren naar Excel</button>
+    <button class="button-right" style="transform: translateX(-160%);" mat-button (click)="addBoeking()">
+      <mat-icon>add_circle</mat-icon>
+      Boeking toevoegen
+    </button>
+  </h1>
 
-  <mat-label>Klant:</mat-label>
+  <mat-label style="font-weight:bold">Filters: </mat-label>
+  <mat-form-field>
+    <mat-select [(ngModel)]="selectedTeamId"  placeholder="Team" >
+      <mat-option>Alle teams</mat-option>
+      <mat-option *ngFor="let team of teamDropDown" [value]="team.id">
+        {{team.naam}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="spacer">
+    <mat-label>Vanaf</mat-label>
+    <input [(ngModel)]="startDate" matInput [matDatepicker]="startDatePicker"  placeholder="datum vanaf">
+    <mat-datepicker-toggle  matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field onchange="getAllBookingRecords()" class="spacer">
+    <mat-label>Tot en met</mat-label>
+    <input [(ngModel)]="endDate" matInput [matDatepicker]="endDatePicker"  placeholder="tot en met">
+    <mat-datepicker-toggle  matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-label onchange="getAllBookingRecords()">Klant:</mat-label>
   <mat-form-field class="filter" floatLabel="never">
     <mat-label>Klant</mat-label>
     <input matInput [formControl]="geboektOpFilter">
   </mat-form-field>
 
-  <mat-label class="label-spacer">Medewerker:</mat-label>
+  <mat-label onchange="getAllBookingRecords()" class="label-spacer">Medewerker:</mat-label>
   <mat-form-field class="filter" floatLabel="never">
     <mat-label>Naam medewerker</mat-label>
     <input matInput [formControl]="medewerkerFilter">
   </mat-form-field>
-
-  <mat-label class="label-spacer">Functie:</mat-label>
-  <mat-form-field class="filter" floatLabel="never">
-    <mat-label>Functie</mat-label>
-    <input matInput [formControl]="functieFilter">
-  </mat-form-field>
-
-  <mat-label class="label-spacer">Team:</mat-label>
-  <mat-form-field class="filter" floatLabel="never">
-    <mat-label>Team</mat-label>
-    <input matInput [formControl]="teamFilter">
-  </mat-form-field>
-
-  <button class="button-right" mat-button (click)="addBoeking()">
-    <mat-icon>add_circle</mat-icon>
-    Boeking toevoegen
-  </button>
 </div>
 
 
