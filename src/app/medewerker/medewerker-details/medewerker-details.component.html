@@ -21,11 +21,11 @@
 
   <table class="example-full-width"><tr>
     <td><mat-form-field class="example-full-width">
-      <input matInput placeholder="Tarief" minlength="1" maxlength="3" #tarief formControlName="tarief">
+      <input matInput type="number" placeholder="Tarief" minlength="1" maxlength="3" #tarief formControlName="tarief">
       <mat-hint align="end">{{tarief.value.length}} / 3</mat-hint>
     </mat-form-field></td>
     <td><mat-form-field class="example-full-width">
-      <input matInput placeholder="InternTarief" minlength="1" maxlength="3" #internTarief formControlName="internTarief">
+      <input matInput type="number" placeholder="InternTarief" minlength="1" maxlength="3" #internTarief formControlName="internTarief">
       <mat-hint align="end">{{internTarief.value.length}} / 3</mat-hint>
     </mat-form-field></td>
   </tr></table>

@@ -5,7 +5,7 @@
 
   <table class="example-full-width"><tr>
     <td><mat-form-field  class="xs">
-      <input matInput  placeholder="Uren" required maxlength="3" formControlName="uren">
+      <input matInput type="number" placeholder="Uren" required maxlength="3" formControlName="uren">
     </mat-form-field></td>
     <td><mat-form-field class="xs">
       <input matInput placeholder="Week nr." [ngModelOptions]="{standalone: true}" type="number" (change)="plannedDateShouldChange()" maxlength="2" max="53" min="1" [(ngModel)]="geplandeWeeknummer" >
