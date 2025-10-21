@@ -1,5 +1,6 @@
+<h1>Klant beheer</h1>
 <div fxLayout fxLayoutAlign="center center" class="reserve-height">
-  <mat-label>Klant filter:</mat-label>
+  <mat-label></mat-label>
   <mat-form-field class="filter" floatLabel="never">
     <mat-label>klant naam</mat-label>
     <input matInput [formControl]="klantFilter">
@@ -42,12 +43,12 @@
 
   <ng-container matColumnDef="Startdate">
     <th mat-header-cell *matHeaderCellDef mat-sort-header="startdatum"> Start datum </th>
-    <td mat-cell *matCellDef="let element"> {{element.startdatum}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.startdatum.split('T')[0]}} </td>
   </ng-container>
 
   <ng-container matColumnDef="Enddate">
     <th mat-header-cell *matHeaderCellDef mat-sort-header="einddatum"> Eind datum</th>
-    <td mat-cell *matCellDef="let element"> {{element.einddatum}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.einddatum.split('T')[0]}} </td>
   </ng-container>
 
 <!--  <ng-container matColumnDef="boekjaren">

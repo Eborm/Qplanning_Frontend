@@ -14,7 +14,7 @@
     <tr>
       <td>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Boekjaar" minlength="4" maxlength="4" #boekjaar formControlName="boekjaar">
+          <input matInput type="number" placeholder="Boekjaar" minlength="4" maxlength="4" #boekjaar formControlName="boekjaar">
           <mat-hint align="end">{{boekjaar.value.length}} / 4</mat-hint>
         </mat-form-field>
       </td>
