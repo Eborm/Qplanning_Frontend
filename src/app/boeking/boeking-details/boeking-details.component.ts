@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import * as moment from 'moment';
@@ -80,7 +80,31 @@ export class BoekingDetailsComponent implements OnInit {
     });
 
     this.klantOrIndirectIsProvided = !!(this.klantId || this.indirecteUrenId);
+
+    this.form.get('uren').valueChanges.subscribe((val: number) => {
+      if (val == null) {return; }
+      let clamped = val;
+      if (val > 24) {clamped = 24;}
+      else if (val < 1) {clamped = 1;}
+
+      if (clamped !== val) {
+        this.form.get('uren').setValue(clamped, { emitEvent: false})
+      }
+    });
+
+    this.form.get('weeknumber').valueChanges.subscribe((Val: number) => {
+      if (Val == null) {return; }
+      let clamped = Val;
+      if (Val > 52) {clamped = 52; }
+      else if (Val < 1) {clamped = 1;}
+
+      if (clamped !== Val) {
+        this.form.get('weeknumber').setValue(clamped, { emitEvent: false})
+      }
+    });
   }
+
+
 
   getBookyears(event) {
     let idFromKlant = this.klantId;
