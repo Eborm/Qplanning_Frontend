@@ -12,7 +12,7 @@ import {MedewerkerDetailsComponent} from '../medewerker-details/medewerker-detai
 export class MedewerkerOverzichtComponent implements OnInit , AfterViewInit {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  public displayedColumns = ['Voornaam', 'TussenVoegsel', 'Achternaam'
+  public displayedColumns = ['Voornaam'
     , 'Email', 'Tarief', 'InternTarief'
     , 'Function', 'Team', 'ResponsibleTeams', 'IsActief', 'update', 'delete'];
   public dataSource = new MatTableDataSource<MedewerkerDetailsView>();
