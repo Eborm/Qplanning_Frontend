@@ -5,7 +5,6 @@ export class KlantDetailsView {
   naam: string;
   planbaarDoorTeamIds: number[];
   // List<DomainModelBoekjaar> Boekjaren { get; set; }
-  budget: number;
   startdatum: Date;
   einddatum: Date;
   medewerkerNaam: string;
