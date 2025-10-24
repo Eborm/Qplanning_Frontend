@@ -14,7 +14,7 @@ export class MedewerkerOverzichtComponent implements OnInit , AfterViewInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   public displayedColumns = ['Voornaam'
     , 'Email', 'Tarief', 'InternTarief'
-    , 'Function', 'Team', 'ResponsibleTeams', 'IsActief', 'update', 'delete'];
+    , 'Function', 'Team', 'ResponsibleTeams', 'IsActief', 'update'];
   public dataSource = new MatTableDataSource<MedewerkerDetailsView>();
   teamDropDown: DropDown[];
   medewerkerFunctieDropDown: DropDown[];

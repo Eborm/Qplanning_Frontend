@@ -17,7 +17,7 @@ export class GebruikerOverzichtComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   // tslint:disable-next-line:max-line-length
-  public displayedColumns = ['Voornaam', 'Achternaam', 'Email', 'Gebruikersnaam', 'Roles', 'roleButtons', 'resetpassword', 'update', 'delete'];
+  public displayedColumns = ['Voornaam', 'Gebruikersnaam', 'Email',  'Roles', 'roleButtons', 'update', 'delete'];
   public dataSource = new MatTableDataSource<User>();
   roles: Role[];
 

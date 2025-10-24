@@ -14,17 +14,7 @@
 <table mat-table [dataSource]="dataSource" class="customTable-fullscreen" matSort>
   <ng-container matColumnDef="Voornaam">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Voornaam </th>
-    <td mat-cell *matCellDef="let element"> {{element.voornaam}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="Achternaam">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Achternaam </th>
-    <td mat-cell *matCellDef="let element"> {{element.achternaam}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="Email">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.voornaam + " " + element.achternaam}} </td>
   </ng-container>
 
   <ng-container matColumnDef="Gebruikersnaam">
@@ -32,8 +22,13 @@
     <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="Email">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
   <ng-container matColumnDef="Roles">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Rollen </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Rol </th>
     <td mat-cell *matCellDef="let element"> {{element.roles}} </td>
   </ng-container>
 
@@ -49,17 +44,8 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="resetpassword">
-    <th mat-header-cell *matHeaderCellDef> Reset Wachtwoord </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="primary" (click)="redirectToResetPassword(element.id, element.email)">
-        <mat-icon class="mat-18">security</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-
   <ng-container matColumnDef="update">
-    <th mat-header-cell *matHeaderCellDef> Update </th>
+    <th mat-header-cell *matHeaderCellDef> Bewerken </th>
     <td mat-cell *matCellDef="let element">
       <button mat-icon-button color="primary" (click)="redirectToUpdate(element)">
         <mat-icon class="mat-18">edit</mat-icon>
@@ -68,7 +54,7 @@
   </ng-container>
 
   <ng-container matColumnDef="delete">
-    <th mat-header-cell *matHeaderCellDef> Delete </th>
+    <th mat-header-cell *matHeaderCellDef> Verweideren </th>
     <td mat-cell *matCellDef="let element">
       <button mat-icon-button color="warn" (click)="redirectToDelete(element.email)">
         <mat-icon class="mat-18">delete</mat-icon>

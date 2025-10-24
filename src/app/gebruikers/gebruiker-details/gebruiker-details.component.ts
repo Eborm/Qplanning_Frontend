@@ -30,6 +30,7 @@ export class GebruikerDetailsComponent implements OnInit {
     this.voornaam = data.voornaam;
     this.achternaam = data.achternaam;
     this.email = data.email;
+    this.password = data.password;
   }
 
   ngOnInit() {
