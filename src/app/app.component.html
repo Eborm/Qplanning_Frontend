@@ -4,8 +4,6 @@
     <h1>QPlanning</h1>
     <span class="menu-spacer"></span>
     <div *ngIf="isLoggedIn">
-      <a mat-button [routerLink]="'/'"> Overzicht </a>
-
       <button mat-button *ngIf="isManager"  [matMenuTriggerFor]="boeking">Plannen</button>
       <mat-menu #boeking="matMenu">
         <button mat-menu-item *ngIf="isAtLeastPlanner" [routerLink]="'/'">Persoonlijke planning</button>
