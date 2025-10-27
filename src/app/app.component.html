@@ -8,12 +8,17 @@
 
       <button mat-button *ngIf="isManager"  [matMenuTriggerFor]="boeking">Plannen</button>
       <mat-menu #boeking="matMenu">
-        <button mat-menu-item *ngIf="isAtLeastPlanner" [routerLink]="'/boekingen-overzicht'">Boekingen overzicht</button>
+        <button mat-menu-item *ngIf="isAtLeastPlanner" [routerLink]="'/'">Persoonlijke planning</button>
         <button mat-menu-item *ngIf="isManager" [routerLink]="'/klant-planning'">Klant planning</button>
         <button mat-menu-item *ngIf="isManager" [routerLink]="'/medewerker-planning'">Medewerker planning</button>
       </mat-menu>
 
-      <button mat-button *ngIf="isAdmin" [matMenuTriggerFor]="beheer">Beheer</button>
+      <button mat-button *ngIf="isManager" [matMenuTriggerFor]="bokeing">Boekingen</button>
+      <mat-menu #bokeing="matMenu">
+        <button mat-menu-item *ngIf="isAtLeastPlanner" [routerLink]="'/boekingen-overzicht'">Boekingen overzicht</button>
+      </mat-menu>
+
+      <button mat-button *ngIf="isAdmin" [matMenuTriggerFor]="beheer">Managment</button>
       <mat-menu #beheer="matMenu">
         <button mat-menu-item [routerLink]="'/beheer-medewerkers'">Medewerkers beheren</button>
         <button mat-menu-item [routerLink]="'/beheer-klanten'">Klanten beheren</button>
