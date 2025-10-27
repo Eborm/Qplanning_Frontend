@@ -55,6 +55,15 @@ export class MedewerkerDetailsComponent implements OnInit {form: FormGroup;
     });
   }
 
+  email_val(){
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    let temp: boolean;
+    temp = emailRegex.test(this.form.get('email').value);
+    if (!temp) {
+      this.form.get('email').setErrors({ 'invalid': true });
+    }
+  }
+
   save() {
     this.dialogRef.close(this.form.value);
   }
