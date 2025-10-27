@@ -50,8 +50,9 @@ export class MedewerkerOverzichtComponent implements OnInit , AfterViewInit {
       });
   }
 
-  public doFilter = (value: string) => {
+  public doFilter = (value: string, extravalue: string) => {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
+    this.dataSource.filter = extravalue.trim().toLocaleLowerCase();
   }
 
   public addMedewerker = () => {

@@ -13,7 +13,7 @@
   <mat-datepicker-toggle  matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
   <mat-datepicker #endDatePicker></mat-datepicker>
 </mat-form-field>
-<mat-form-field>
+<mat-form-field class="spacer">
   <mat-select [(ngModel)]="selectedTeamId"  placeholder="Team" >
     <mat-option>Alle teams</mat-option>
     <mat-option *ngFor="let team of teamDropDown" [value]="team.id">
@@ -21,7 +21,7 @@
     </mat-option>
   </mat-select>
 </mat-form-field>
-<mat-form-field>
+<mat-form-field class="spacer">
   <mat-select [multiple]="true" [(ngModel)]="selectedKlantIds"  placeholder="Klant" >
     <mat-option *ngFor="let klant of klantDropDown" [value]="klant.id">
       {{klant.naam}}

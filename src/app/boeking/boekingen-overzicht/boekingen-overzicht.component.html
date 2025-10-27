@@ -38,14 +38,14 @@
     <mat-datepicker #endDatePicker></mat-datepicker>
   </mat-form-field>
 
-  <mat-label onchange="getAllBookingRecords()">Klant:</mat-label>
+  <mat-label onchange="getAllBookingRecords()" class="label-spacer"></mat-label>
   <mat-form-field class="filter" floatLabel="never">
     <mat-label>Klant</mat-label>
     <input matInput [formControl]="geboektOpFilter">
   </mat-form-field>
 
-  <mat-label onchange="getAllBookingRecords()" class="label-spacer">Medewerker:</mat-label>
-  <mat-form-field class="filter" floatLabel="never">
+  <mat-label onchange="getAllBookingRecords()" class="label-spacer"></mat-label>
+  <mat-form-field class="filter" floatLabel="never" >
     <mat-label>Naam medewerker</mat-label>
     <input matInput [formControl]="medewerkerFilter">
   </mat-form-field>
