@@ -76,7 +76,10 @@ public getAllBookingRecords = () => {
   this.repoService.post('api/boeking/getDetailBoekingWithinPeriod',
     {endDate: this.endDate, startDate: this.startDate, teamId: this.selectedTeamId})
     .subscribe(res => {
-      const bookings = (res as any).bookingsDetail || [];
+      let bookings = (res as any).bookingsDetail || [];
+      bookings = bookings.filter(b => 
+        b.medewerkerNaam.toLowerCase().includes(this.filterValues.medewerkerNaam.toLowerCase())
+      );  
       this.dataSource.data = bookings;
       this.dataSource.filterPredicate = this.tableFilter();
       this.buildDailyPlanning(bookings);
