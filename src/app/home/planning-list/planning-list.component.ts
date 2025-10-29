@@ -3,7 +3,24 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {PersonalBooking, User} from '../../_models';
 import {AuthenticationService, RepositoryService} from '../../_services';
 import {Moment} from 'moment';
-import * as moment from 'moment';
+import moment from 'moment';
+import {BaseResponse, BookingDetailsView, DropDown} from '../../_models';
+import {BoekingDetailsComponent} from '../../boeking/boeking-details/boeking-details.component';
+import {ConfirmationComponent} from '../../modal';
+import {FormControl} from '@angular/forms';
+import * as fileSaver from 'file-saver';
+
+
+interface DagPlanning {
+  date: string;
+  uren: number;
+  boekingen: number;
+}
+
+interface KlantDagPlanning {
+  naam: string;
+  dagen: DagPlanning[];
+}
 
 @Component({
   selector: 'app-planning-list',
@@ -15,15 +32,22 @@ export class PlanningListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   nonBillableHoursOutput: PersonalBooking[];
   public displayedColumns = ['Weeknumber', 'Year', 'Subject', 'Hours'];
-  public dataSource = new MatTableDataSource<PersonalBooking>();
+  public dataSource = new MatTableDataSource<BookingDetailsView>();
   currentUser: User;
   startDate: Moment;
   endDate: Moment;
   isLoading = false;
   hasError = false;
   areAllCollapsed = true;
-
+  klantenDagPlanning: KlantDagPlanning[] = [];
   personalPlanningViewModel;
+  filterValues = {
+    geboektOp: '',
+    medewerkerNaam: '',
+    medewerkerFunctie: '',
+    teamNaam: ''
+  };
+  selectedTeamId: number;
 
 
   constructor( private repoService: RepositoryService,
@@ -31,10 +55,11 @@ export class PlanningListComponent implements OnInit, AfterViewInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.startDate = moment().startOf('week');
     this.endDate = moment(this.startDate, 'YYYY-DD-MM').add(3, 'month').startOf('week').utc(true);
+    this.filterValues.medewerkerNaam = this.currentUser.voornaam + ' ' + this.currentUser.achternaam;
   }
 
   ngOnInit() {
-    this.getMyCurrentPlanning();
+    this.getAllBookingRecords();
   }
 
   ngAfterViewInit(): void {
@@ -42,42 +67,81 @@ export class PlanningListComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
+public getAllBookingRecords = () => {
+  if (!this.selectedTeamId) { this.selectedTeamId = 0; }
 
-  public getMyCurrentPlanning = () => {
-    if (!this.isLoading) {
-      this.isLoading = true;
-      this.hasError = false;
-      this.repoService.post('api/boeking/getPersonalBoekingWithinPeriod',
-        {endDate: this.endDate, startDate: this.startDate})
-        .subscribe(res => {
-          // @ts-ignore
-          this.personalPlanningViewModel = res.personalPlanningViewModel as personalPlanningViewModel;
-          this.isLoading = false;
-        },
-          error => this.hasError = true);
+  this.isLoading = true;
+  this.hasError = false;
+
+  this.repoService.post('api/boeking/getDetailBoekingWithinPeriod',
+    {endDate: this.endDate, startDate: this.startDate, teamId: this.selectedTeamId})
+    .subscribe(res => {
+      const bookings = (res as any).bookingsDetail || [];
+      this.dataSource.data = bookings;
+      this.dataSource.filterPredicate = this.tableFilter();
+      this.buildDailyPlanning(bookings);
+      this.isLoading = false;
+    }, error => {
+      this.hasError = true;
+      this.isLoading = false;
+    });
+}
+
+  tableFilter(): (data: any, filter: string) => boolean {
+    return (data, filter): boolean => {
+      const searchTerms = JSON.parse(filter);
+
+      // tslint:disable-next-line:max-line-length
+      if (searchTerms.geboektOp === '' && searchTerms.medewerkerNaam === '' && searchTerms.medewerkerFunctie === '' && searchTerms.teamNaam === '') {
+        return true;
+      }
+
+      return data.geboektOp.toLocaleLowerCase().indexOf(searchTerms.geboektOp.toLocaleLowerCase()) !== -1
+        && data.medewerkerNaam.toLocaleLowerCase().indexOf(searchTerms.medewerkerNaam.toLocaleLowerCase()) !== -1
+        && data.medewerkerFunctie.toLocaleLowerCase().indexOf(searchTerms.medewerkerFunctie.toLocaleLowerCase()) !== -1
+        && data.teamNaam.toLocaleLowerCase().indexOf(searchTerms.teamNaam.toLocaleLowerCase()) !== -1;
+    };
+  }
+
+    buildDailyPlanning(bookings: BookingDetailsView[]) {
+
+    const maandag = moment(this.startDate).startOf('week');
+
+    // Create 7 days labels in ISO format for comparison
+    const dagenLabels = [];
+    for (let i = 0; i < 7; i++) {
+      dagenLabels.push(moment(maandag).add(i, 'days').format("YYYY-MM-DD"));
     }
+
+    // Get unique list of clients
+    const uniekeKlanten = [...new Set(bookings.map(b => b.klantNaam))];
+
+    // Build planning grid
+    this.klantenDagPlanning = uniekeKlanten.map(klantNaam => ({
+      naam: klantNaam,
+      dagen: dagenLabels.map(date => {
+        const dagBoekingen = bookings.filter(b =>
+          b.klantNaam === klantNaam &&
+          moment(b.plannedDate).format("YYYY-MM-DD") === date
+        );
+
+        return {
+          date,
+          uren: dagBoekingen.reduce((sum, b) => sum + b.uren, 0),
+          boekingen: dagBoekingen.length
+        };
+      })
+    }));
+  }
+
+
+  public SetDateRange = (week: number) => {
+    this.startDate = moment().startOf('year').add(week - 1, 'weeks').startOf('week');
+    this.endDate = moment().startOf('year').add(week - 1, 'weeks').endOf('week');
+    this.getAllBookingRecords();
   }
 
   public doFilter = (value: string) => {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
-
-  public collapseAll() {
-    if (this.areAllCollapsed === true) {
-
-      this.personalPlanningViewModel.topRows.forEach(personalPlanning => {
-        personalPlanning.expanded = true;
-      });
-      this.areAllCollapsed = false;
-      return;
-    }
-    if (this.areAllCollapsed === false) {
-      this.personalPlanningViewModel.topRows.forEach(personalPlanning => {
-        personalPlanning.expanded = false;
-      });
-      this.areAllCollapsed = true;
-      return;
-    }
-  }
-
 }

@@ -1,69 +1,41 @@
-<!--suppress ALL -->
 <h2>Persoonlijk planningsoverzicht</h2>
 
-<mat-form-field>
-  <mat-label>Vanaf</mat-label>
-  <input [(ngModel)]="startDate" matInput [matDatepicker]="startDatePicker"  placeholder="datum vanaf">
-  <mat-datepicker-toggle  matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
-  <mat-datepicker #startDatePicker></mat-datepicker>
-</mat-form-field>
 <mat-form-field class="spacer">
   <mat-label>Tot en met</mat-label>
-  <input [(ngModel)]="endDate" matInput [matDatepicker]="endDatePicker"  placeholder="tot en met">
-  <mat-datepicker-toggle  matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
-  <mat-datepicker #endDatePicker></mat-datepicker>
+  <input (keyup)="SetDateRange($event.target.value)" type="number" placeholder="weeknummer">
 </mat-form-field>
-<button class="spacer" [disabled]="isLoading || hasError" mat-button (click)="getMyCurrentPlanning()">Zoek planning</button>
-<button *ngIf="areAllCollapsed" class="spacer  button-right" mat-button (click)="collapseAll()">Alles uitklappen</button>
-<button *ngIf="!areAllCollapsed" class="spacer  button-right" mat-button (click)="collapseAll()">Alles inklappen</button>
 
-<div [hidden]="!isLoading || hasError" class="loader"> Bezig met het ophalen van gegevens. Even geduld aub...<p><mat-spinner></mat-spinner></p></div>
-<div [hidden]="!hasError"> Een fout is opgetreden bij het ophalen van data, probeer het aub opnieuw.</div>
-<table [hidden]="isLoading || hasError"  *ngIf="personalPlanningViewModel">
-  <col>
-  <colgroup span="12"></colgroup>
-  <thead class="ZuydPlanningHeader">
-  <tr>
-    <td align="center" rowspan="3">Klanten</td>
-    <td align="center" rowspan="3">Opdrachtleider</td>
-    <th [attr.colspan]="personalPlanningViewModel.totalAmountOfWeeks" scope="colgroup">Weken</th>
-  </tr>
-  <tr>
-  <ng-container  *ngFor="let year of personalPlanningViewModel.years; let i = index">
-  <th scope="col" [attr.colspan]="year.weeks.length">{{year.year}}</th>
-  </ng-container>
-  </tr>
-  <tr>
-    <ng-container  *ngFor="let year of personalPlanningViewModel.years; let i = index">
-      <ng-container  *ngFor="let week of year.weeks; let i = index">
-        <th scope="col">{{week.weeknumber}}<p class="xsFont">{{week.startOfWeekDay}}</p></th>
-      </ng-container>
-    </ng-container>
-  </tr>
-  </thead>
-  <tbody>
+<button class="spacer" [disabled]="isLoading || hasError" mat-button (click)="getAllBookingRecords()">Zoek planning</button>
+<div *ngIf="isLoading && !hasError" class="loader">
+  Bezig met het ophalen van gegevens. Even geduld aub...
+  <p><mat-spinner></mat-spinner></p>
+</div>
 
-    <ng-container  *ngFor="let klant of personalPlanningViewModel.topRows; let i = index">
-      <tr>
-      <th align="left" class="boldTableHeader" scope="row">{{klant.naam}}
-        <a *ngIf="klant.expanded && klant.detailRows?.length > 0" (click)="klant.expanded = false"> <mat-icon class="qOrangeArrow">expand_less</mat-icon></a>
-        <a *ngIf="!klant.expanded && klant.detailRows?.length > 0" (click)="klant.expanded = true"> <mat-icon class="qGreenArrow">expand_more</mat-icon></a>
+<div *ngIf="hasError">
+  Een fout is opgetreden bij het ophalen van data, probeer het aub opnieuw.
+</div>
+
+<!-- PLANNING TABEL -->
+<table class="persoonlijke-planning" *ngIf="klantenDagPlanning.length">
+  <thead>
+    <tr>
+      <th>Klant</th>
+      <th *ngFor="let dag of klantenDagPlanning[0].dagen">
+        {{ dag.date | date:'EEE dd-MM' }}
       </th>
-        <th align="left" class="boldTableHeader smallFont" scope="row">{{klant.opdrachtleider}}
-        </th>
-        <ng-container  *ngFor="let planning of klant.planning; let i = index">
-          <td [ngClass]="{'qRed': planning.uren > 48 , 'qOrange':planning.uren < 32, 'qGreen':planning.uren >= 32 && planning.uren <= 48 }" align="center">{{planning.uren}}</td>
-        </ng-container>
-      </tr>
-      <ng-container  *ngFor="let medeMedewerkers of klant.detailRows; let i = index">
-      <tr *ngIf="klant.expanded" >
-        <th align="right" class="boldTableHeader smallFont" scope="row">{{medeMedewerkers.naam}} </th>
-        <th></th>
-        <ng-container  *ngFor="let planning of medeMedewerkers.planning; let i = index">
-          <td [ngClass]="{'qRed': planning.uren > 48 , 'qOrange':planning.uren < 32, 'qGreen':planning.uren >= 32 && planning.uren <= 48 }" class="smallFont" align="center">{{planning.uren}}</td>
-        </ng-container>
-      </tr>
-      </ng-container>
-    </ng-container>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let klant of klantenDagPlanning">
+      <th>{{ klant.naam }}</th>
+
+      <td *ngFor="let dag of klant.dagen">
+        <div class="cel" *ngIf="dag.uren > 0">
+          <div class="uren">{{ dag.uren }} uur</div>
+          <div class="boekingen">{{ dag.boekingen }} boeking(en)</div>
+        </div>
+      </td>
+    </tr>
   </tbody>
 </table>

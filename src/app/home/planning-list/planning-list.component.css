@@ -97,3 +97,34 @@ tbody tr:first-child .qRed {
   stroke: #8aba87;
 }
 
+.persoonlijke-planning {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+}
+
+.persoonlijke-planning th,
+.persoonlijke-planning td {
+  border: 1px solid #ccc;
+  padding: 4px;
+  width: 120px;
+  height: 60px;
+}
+
+th:first-child {
+  text-align: left;
+  width: 180px;
+}
+
+.cel {
+  border: 1px solid #000;
+  padding: 3px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.uren {
+  font-weight: bold;
+}
+
