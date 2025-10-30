@@ -51,11 +51,7 @@ export class PlanningListComponent implements OnInit, AfterViewInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.startDate = moment().startOf('week');
     this.endDate = moment(this.startDate, 'YYYY-DD-MM').add(3, 'month').startOf('week').utc(true);
-
-    if (this.currentUser.achternaam.split('').length < 2) {
-      this.currentUser.achternaam = this.currentUser.achternaam.replace('  ', ' ');
-    }
-
+    this.currentUser.achternaam = this.currentUser.achternaam.replace("  ", " ");
     this.filterValues.medewerkerNaam = this.currentUser.voornaam + ' ' + this.currentUser.achternaam;
   }
 
