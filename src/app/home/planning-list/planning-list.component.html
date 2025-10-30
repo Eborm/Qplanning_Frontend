@@ -1,11 +1,10 @@
 <h2>Persoonlijk planningsoverzicht</h2>
 
 <mat-form-field class="spacer">
-  <mat-label>Tot en met</mat-label>
-  <input (keyup)="SetDateRange($event.target.value)" type="number" placeholder="weeknummer">
+  <input min="1" max="52" style="width: 60%;" type="number" (keyup)="SetDateRange($event.target.value)" placeholder="weeknummer">
 </mat-form-field>
 
-<button class="spacer" [disabled]="isLoading || hasError" mat-button (click)="getAllBookingRecords()">Zoek planning</button>
+<button style="transform: translateX(-50%);" [disabled]="isLoading || hasError" mat-button (click)="getAllBookingRecords()">Zoek planning</button>
 <div *ngIf="isLoading && !hasError" class="loader">
   Bezig met het ophalen van gegevens. Even geduld aub...
   <p><mat-spinner></mat-spinner></p>
@@ -13,6 +12,10 @@
 
 <div *ngIf="hasError">
   Een fout is opgetreden bij het ophalen van data, probeer het aub opnieuw.
+</div>
+
+<div *ngIf="!isLoading && !hasError && klantenDagPlanning.length === 0">
+  Geen planningsgegevens gevonden voor de geselecteerde periode.
 </div>
 
 <!-- PLANNING TABEL -->
