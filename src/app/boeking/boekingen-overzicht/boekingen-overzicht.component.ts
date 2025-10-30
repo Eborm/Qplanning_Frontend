@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogConfig, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import moment from 'moment';
+import * as moment from 'moment';
 import {Moment} from 'moment';
 import {FileService, RepositoryService, SnackbarService} from '../../_services';
 import {BaseResponse, BookingDetailsView, DropDown} from '../../_models';

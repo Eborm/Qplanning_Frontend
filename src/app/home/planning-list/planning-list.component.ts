@@ -3,7 +3,7 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {PersonalBooking, User} from '../../_models';
 import {AuthenticationService, RepositoryService} from '../../_services';
 import {Moment} from 'moment';
-import moment from 'moment';
+import * as moment from 'moment';
 import {BaseResponse, BookingDetailsView, DropDown} from '../../_models';
 import {BoekingDetailsComponent} from '../../boeking/boeking-details/boeking-details.component';
 import {ConfirmationComponent} from '../../modal';
@@ -55,7 +55,7 @@ export class PlanningListComponent implements OnInit, AfterViewInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.startDate = moment().startOf('week');
     this.endDate = moment(this.startDate, 'YYYY-DD-MM').add(3, 'month').startOf('week').utc(true);
-    this.filterValues.medewerkerNaam = this.currentUser.voornaam + ' ' + this.currentUser.achternaam;
+    this.filterValues.medewerkerNaam = this.currentUser.voornaam + '  ' + this.currentUser.achternaam;
   }
 
   ngOnInit() {
@@ -77,9 +77,9 @@ public getAllBookingRecords = () => {
     {endDate: this.endDate, startDate: this.startDate, teamId: this.selectedTeamId})
     .subscribe(res => {
       let bookings = (res as any).bookingsDetail || [];
-      bookings = bookings.filter(b => 
+      bookings = bookings.filter(b =>
         b.medewerkerNaam.toLowerCase().includes(this.filterValues.medewerkerNaam.toLowerCase())
-      );  
+      );
       this.dataSource.data = bookings;
       this.dataSource.filterPredicate = this.tableFilter();
       this.buildDailyPlanning(bookings);
