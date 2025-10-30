@@ -51,7 +51,7 @@ export class PlanningListComponent implements OnInit, AfterViewInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.startDate = moment().startOf('week');
     this.endDate = moment(this.startDate, 'YYYY-DD-MM').add(3, 'month').startOf('week').utc(true);
-    this.currentUser.achternaam = this.currentUser.achternaam.replace("  ", " ");
+    this.currentUser.achternaam = this.currentUser.achternaam.replace('  ', ' ');
     this.filterValues.medewerkerNaam = this.currentUser.voornaam + ' ' + this.currentUser.achternaam;
   }
 
@@ -74,10 +74,9 @@ public getAllBookingRecords = () => {
     {endDate: this.endDate, startDate: this.startDate, teamId: this.selectedTeamId})
     .subscribe(res => {
       let bookings = (res as any).bookingsDetail || [];
-      bookings = bookings.filter(b => 
+      bookings = bookings.filter(b =>
         b.medewerkerNaam.toLowerCase().includes(this.filterValues.medewerkerNaam.toLowerCase())
-      );  
-      console.log("json" + JSON.stringify(bookings));
+      );
       this.dataSource.data = bookings;
       this.dataSource.filterPredicate = this.tableFilter();
       this.buildDailyPlanning(bookings);
