@@ -5,10 +5,6 @@ import {AuthenticationService, RepositoryService} from '../../_services';
 import {Moment} from 'moment';
 import moment from 'moment';
 import {BaseResponse, BookingDetailsView, DropDown} from '../../_models';
-import {BoekingDetailsComponent} from '../../boeking/boeking-details/boeking-details.component';
-import {ConfirmationComponent} from '../../modal';
-import {FormControl} from '@angular/forms';
-import * as fileSaver from 'file-saver';
 
 
 interface DagPlanning {
@@ -55,6 +51,11 @@ export class PlanningListComponent implements OnInit, AfterViewInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.startDate = moment().startOf('week');
     this.endDate = moment(this.startDate, 'YYYY-DD-MM').add(3, 'month').startOf('week').utc(true);
+
+    if (this.currentUser.achternaam.split('').length < 2) {
+      this.currentUser.achternaam = this.currentUser.achternaam.replace('  ', ' ');
+    }
+
     this.filterValues.medewerkerNaam = this.currentUser.voornaam + ' ' + this.currentUser.achternaam;
   }
 
@@ -80,6 +81,7 @@ public getAllBookingRecords = () => {
       bookings = bookings.filter(b => 
         b.medewerkerNaam.toLowerCase().includes(this.filterValues.medewerkerNaam.toLowerCase())
       );  
+      console.log("json" + JSON.stringify(bookings));
       this.dataSource.data = bookings;
       this.dataSource.filterPredicate = this.tableFilter();
       this.buildDailyPlanning(bookings);

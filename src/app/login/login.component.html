@@ -9,13 +9,13 @@
           <tr>
             <td>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Gebruikersnaam" [(ngModel)]="username" name="username" required>
+                <input matInput (keydown.enter)="login()" placeholder="Gebruikersnaam" [(ngModel)]="username" name="username" required>
               </mat-form-field>
             </td>
           </tr>
           <tr>
             <td><mat-form-field class="example-full-width">
-              <input matInput placeholder="Wachtwoord" [(ngModel)]="password"type="password" name="password" required>
+              <input matInput (keydown.enter)="login()" placeholder="Wachtwoord" [(ngModel)]="password"type="password" name="password" required>
             </mat-form-field></td>
           </tr></table>
       </form>
