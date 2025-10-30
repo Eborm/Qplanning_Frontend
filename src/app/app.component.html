@@ -16,7 +16,7 @@
         <button mat-menu-item *ngIf="isAtLeastPlanner" [routerLink]="'/boekingen-overzicht'">Boekingen overzicht</button>
       </mat-menu>
 
-      <button mat-button *ngIf="isAdmin" [matMenuTriggerFor]="beheer">Managment</button>
+      <button mat-button *ngIf="isAdmin" [matMenuTriggerFor]="beheer">Management</button>
       <mat-menu #beheer="matMenu">
         <button mat-menu-item [routerLink]="'/beheer-medewerkers'">Medewerkers beheren</button>
         <button mat-menu-item [routerLink]="'/beheer-klanten'">Klanten beheren</button>
