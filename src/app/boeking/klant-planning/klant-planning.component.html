@@ -71,16 +71,20 @@
         <a *ngIf="!klant.expanded && klant.detailRows?.length > 0" (click)="klant.expanded = true"> <mat-icon class="qGreenArrow">expand_more</mat-icon></a>
       </th>
       <ng-container  *ngFor="let planning of klant.planning; let i = index">
-        <td align="center">{{planning.uren}}</td>
+        <td class="weekCell" align="center">
+          <div class="hours" *ngIf="planning.uren">{{ planning.uren }} uur</div>
+        </td>
       </ng-container>
       <th align="center" class="boldTableHeader boldText" scope="row">{{klant.total}}
       </th>
     </tr>
     <ng-container  *ngFor="let medeMedewerkers of klant.detailRows; let i = index">
       <tr *ngIf="klant.expanded" >
-        <th align="right" class="boldTableHeader smallFont" scope="row">{{medeMedewerkers.naam}} </th>
+        <th align="right" class="Medewerker boldTableHeader smallFont" scope="row">{{medeMedewerkers.naam}} </th>
         <ng-container  *ngFor="let planning of medeMedewerkers.planning; let i = index">
-          <td class="smallFont" align="center">{{planning.uren}}</td>
+          <td class="weekCell" align="center">
+            <div class="hours" *ngIf="planning.uren">{{ planning.uren }} uur</div>
+          </td>
         </ng-container>
       </tr>
     </ng-container>

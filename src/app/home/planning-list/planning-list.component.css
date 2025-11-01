@@ -1,130 +1,74 @@
-table{
-  border: 1px solid black;
+table {
   border-collapse: collapse;
-  border-spacing: 0;
+  width: 100%;
+  font-size: 14px;
 }
 
-thead td{
-  border: 1px dotted lightslategray;
-  font-weight: 500;
+thead th, thead td {
+  background: #d8e7f6;
+  border: 1px solid #a9b8c6;
+  font-weight: 600;
+  text-align: center;
+  padding: 6px 8px;
 }
 
 .ZuydPlanningHeader {
-  color: white;
-  background-color: #85c4f0;
+  background: #d8e7f6 !important;
+  color: #000 !important;
+  border-bottom: 2px solid #6c6c6c;
 }
 
-thead th {
-  border: 1px dotted lightslategray;
-  font-weight: 500;
-  min-width: 25px;
+.weekHeader {
+  background: #d8e7f6 !important;
+  border-bottom: 1px solid #6c6c6c;
 }
 
-tbody tr:first-child th:first-child{
-  border: 1px dotted lightslategray;
-  font-weight: bold;
-}
-
-tbody th{
-  border: 1px dotted lightslategray;
-  font-weight: normal;
-}
-
-tbody td{
-  border: 1px dotted lightslategray;
-  font-weight: normal;
-}
-
-tbody tr:nth-child(odd){
+tbody tr:nth-child(odd) {
   background: #E0E8F2;
 }
 
-tbody tr:first-child .overplanned{
-  color: red;
+tbody th {
+  text-align: left;
+  padding: 6px 8px;
+  border: 1px solid #a9b8c6;
+  font-weight: normal;
 }
 
-tbody tr:first-child .underplanned{
-  color: #ebbd64;
+tbody td {
+  border: 1px solid #a9b8c6;
+  text-align: center;
+  padding: 4px 6px;
+  background: white;
 }
 
-tbody tr:first-child .perfect{
-  color: #8aba87;
+.weekCell {
+  padding: 4px 6px;
+  min-width: 60px;
+  background: white;
 }
 
-.smallFont {
-  font-size: 12px;
+.boldText {
+  font-weight: 700 !important;
 }
 
-.xsFont{
+.hours {
+  font-weight: 600;
+  color: #000;
+}
+
+/* Small date line */
+.xsFont {
   font-size: 9px;
+  margin-top: 2px;
+  color: #555;
 }
 
-p.xsFont {
-  padding: 0;
-  margin: 0;
-}
-
-th.boldTableHeader a{
-  cursor: pointer;
-}
-
-.mat-icon {
-  font-size: 15px;
-  margin-bottom: -5px;
-}
-
-tbody tr:first-child .qGreen {
-  color: #8aba87;
-}
-
-tbody tr:first-child .qOrange {
-  color: #ebbd64;
-}
-
-tbody tr:first-child .qRed {
-  color: #EA6A6A;
-}
-
+/* Expand arrows */
 .qGreenArrow {
   color: #8aba87;
+  cursor: pointer;
 }
-
 .qOrangeArrow {
   color: #ebbd64;
+  cursor: pointer;
 }
-
-.loader ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
-  stroke: #8aba87;
-}
-
-.persoonlijke-planning {
-  border-collapse: collapse;
-  width: 100%;
-  text-align: center;
-}
-
-.persoonlijke-planning th,
-.persoonlijke-planning td {
-  border: 1px solid #ccc;
-  padding: 4px;
-  width: 120px;
-  height: 60px;
-}
-
-th:first-child {
-  text-align: left;
-  width: 180px;
-}
-
-.cel {
-  border: 1px solid #000;
-  padding: 3px;
-  font-size: 12px;
-  display: flex;
-  flex-direction: column;
-}
-
-.uren {
-  font-weight: bold;
-}
-

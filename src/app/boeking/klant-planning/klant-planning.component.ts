@@ -38,8 +38,8 @@ export class KlantPlanningComponent implements OnInit, AfterViewInit {
   constructor( private repoService: RepositoryService,
                private authenticationService: AuthenticationService) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    this.startDate = moment().startOf('week');
-    this.endDate = moment(this.startDate, 'YYYY-DD-MM').add(6, 'month').startOf('week').utc(true);
+    this.startDate = moment().startOf('week').add(-1, 'month');
+    this.endDate = moment(this.startDate, 'YYYY-DD-MM').add(3, 'month').startOf('week').utc(true);
   }
 
   ngOnInit() {
