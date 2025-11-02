@@ -51,8 +51,14 @@ export class PlanningListComponent implements OnInit, AfterViewInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.startDate = moment().startOf('week');
     this.endDate = moment(this.startDate, 'YYYY-DD-MM').add(3, 'month').startOf('week').utc(true);
-    this.currentUser.achternaam = this.currentUser.achternaam.replace('  ', ' ');
-    this.filterValues.medewerkerNaam = this.currentUser.voornaam + ' ' + this.currentUser.achternaam;
+    if (this.currentUser.achternaam.split(' ').length > 1) {
+      this.currentUser.achternaam = this.currentUser.achternaam.replace('  ', ' ');
+      this.filterValues.medewerkerNaam = this.currentUser.voornaam + ' ' + this.currentUser.achternaam;
+    }
+    else{
+      this.filterValues.medewerkerNaam = this.currentUser.voornaam + '  ' + this.currentUser.achternaam;
+    }
+    console.log('Current user in planning list: ', this.filterValues.medewerkerNaam);
   }
 
   ngOnInit() {
