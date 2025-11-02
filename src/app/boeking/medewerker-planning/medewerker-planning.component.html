@@ -84,7 +84,7 @@
     </tr>
     <ng-container  *ngFor="let klant of medewerker.detailRows; let i = index">
       <tr *ngIf="medewerker.expanded" >
-        <th align="right" class="boldTableHeader smallFont" scope="row">{{klant.naam}} </th>
+        <th align="right" class="Medewerker boldTableHeader smallFont" scope="row">{{klant.naam}} </th>
         <ng-container  *ngFor="let planning of klant.planning; let i = index">
           <td class="smallFont" align="center">{{planning.uren}}</td>
         </ng-container>

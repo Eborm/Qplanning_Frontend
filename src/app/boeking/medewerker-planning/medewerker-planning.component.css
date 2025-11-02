@@ -1,61 +1,74 @@
-table{
-  border: 1px solid black;
+/* General table layout */
+table {
   border-collapse: collapse;
-  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #d0d0d0;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
 }
 
-thead td{
-  border: 1px dotted lightslategray;
-  font-weight: 500;
-}
-
+/* Header styles */
+thead td,
 thead th {
-  border: 1px dotted lightslategray;
-  font-weight: 500;
-  min-width: 25px;
+  background-color: #d8e7f6;
+  color: #000;
+  text-align: center;
+  font-weight: 600;
+  border: 1px solid #c0c0c0;
+  padding: 6px 8px;
 }
 
-tbody th{
-  border: 1px dotted lightslategray;
-  font-weight: normal;
-}
-
-tbody td{
-  border: 1px dotted lightslategray;
-  font-weight: normal;
-}
-
-tbody tr:nth-child(odd){
-  background: #E0E8F2;
-}
-
-tbody tr .qGreen {
-  color: #8aba87;
-}
-
-tbody tr .qOrange {
-  color: #ebbd64;
-}
-
-tbody tr .qRed {
-  color: #EA6A6A;
-}
-
-
-.smallFont {
-  font-size: 12px;
-}
-
-.xsFont{
-  font-size: 9px;
-}
-
-p.xsFont {
-  padding: 0;
+thead th.weekHeader p.xsFont {
   margin: 0;
+  font-size: 10px;
+  color: #555;
 }
 
-th.boldTableHeader a{
+/* Body rows */
+tbody tr {
+  background: #fff;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+tbody tr:hover {
+  background: #f5f9ff;
+}
+
+/* Row and cell styles */
+tbody th,
+tbody td {
+  border: 1px solid #dcdcdc;
+  padding: 6px 8px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Left column (Klanten) */
+tbody th {
+  text-align: left;
+  background-color: #f1f6fc;
+  font-weight: 500;
+}
+
+/* Total column */
+.boldText {
+  background-color: #f1f6fc;
+  font-weight: 600;
+}
+
+/* Hours display */
+.hours {
+  font-weight: 600;
+  color: #000;
+}
+
+/* Remove thick alternate row background */
+tbody tr:nth-child(odd) {
+  background: #fff;
+}
+
+/* Icons and interactions */
+th.boldTableHeader a {
   cursor: pointer;
 }
 
@@ -64,39 +77,25 @@ th.boldTableHeader a{
   margin-bottom: -5px;
 }
 
-.green{
-  color: green;
-}
-
-.red{
-  color:red;
-}
-
-th.boldTableHeader.boldText{
-  font-weight: 500;
-}
-
-.tableFixHead          { overflow-y: auto; height: 100px; }
-.tableFixHead thead th.weekHeader { position: sticky; top: 0;  background: #85c4f0; }
-
-
+/* Consistent header look */
 .ZuydPlanningHeader {
-  color: white;
-  background-color: #85c4f0;
+  background: #d8e7f6 !important;
+  color: black !important;
+  border-bottom: 2px solid #6c6c6c;
 }
 
-.qGreenArrow {
-  color: #8aba87;
+/* Week header styling */
+.tableFixHead thead th.weekHeader {
+  background: #d8e7f6 !important;
+  border-bottom: 1px solid #6c6c6c;
 }
 
-.qOrangeArrow {
-  color: #ebbd64;
+/* Optional: soften table shadow */
+.tableFixHead {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.loader ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
-  stroke: #8aba87;
-}
-
-.icon-display {
-  transform: scale(1);
+.Medewerker {
+  font-style: italic;
+  color: #555;
 }
