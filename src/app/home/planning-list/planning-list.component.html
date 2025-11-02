@@ -1,7 +1,7 @@
 <h2>Persoonlijk planningsoverzicht</h2>
 
 <mat-form-field class="spacer">
-  <input min="1" max="52" style="width: 60%;" type="number" (keyup)="SetDateRange($event.target.value)" placeholder="weeknummer">
+  <input min="1" max="52" style="width: 60%;" type="number" (keyup)="SetDateRange($event.target.value)" (change)="SetDateRange($event.target.value)" placeholder="weeknummer">
 </mat-form-field>
 
 <button style="transform: translateX(-50%);" [disabled]="isLoading || hasError" mat-button (click)="getAllBookingRecords()">Zoek planning</button>

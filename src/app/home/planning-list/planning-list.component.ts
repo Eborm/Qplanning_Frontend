@@ -2,8 +2,8 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {PersonalBooking, User} from '../../_models';
 import {AuthenticationService, RepositoryService} from '../../_services';
-import {Moment} from 'moment';
 import moment from 'moment';
+import {Moment} from 'moment';
 import {BaseResponse, BookingDetailsView, DropDown} from '../../_models';
 
 

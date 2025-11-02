@@ -13,7 +13,7 @@
 
 <table mat-table [dataSource]="dataSource" class="customTable-fullscreen" matSort>
   <ng-container matColumnDef="Voornaam">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Voornaam </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Naam </th>
     <td mat-cell *matCellDef="let element"> {{element.voornaam + " " + element.achternaam}} </td>
   </ng-container>
 
